@@ -9,12 +9,11 @@ from brownie import AdvancedCollectable, network, config
 
 sample_token_uri = "https://ipfs.io/ipfs/Qmd9MCGtdVz2miNumBHDbvj8bigSgTwnr4SbyH6DNnpWdt?filename=0-PUG.json"
 
-ACTIVE_NETWORK = network.show_active()
-NETWORK_CONFIG = config["networks"][ACTIVE_NETWORK]
-
 
 def deploy_and_create():
     account = get_account()
+    ACTIVE_NETWORK = network.show_active()
+    NETWORK_CONFIG = config["networks"][ACTIVE_NETWORK]
     advanced_collectable = AdvancedCollectable.deploy(
         get_contract("vrf_coordinator"),
         get_contract("link_token"),
@@ -23,12 +22,12 @@ def deploy_and_create():
         {"from": account},
     )
     fund_contract_with_link(advanced_collectable.address)
-    tx = advanced_collectable.createCollectable({"from": account})
-    tx.wait(1)
+    create_tx = advanced_collectable.createCollectable({"from": account})
+    create_tx.wait(1)
     print(
         f"Awesome you can view your NFT at {OPENSEA_URL.format(advanced_collectable.address, advanced_collectable.tokenCounter() - 1)}"
     )
-    return advanced_collectable
+    return advanced_collectable, create_tx
 
 
 def main():

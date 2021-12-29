@@ -12,7 +12,7 @@ from brownie import (
 from web3 import Web3
 
 
-OPENSEA_URL = "https://testnets.opensea.io/asset/{}/{}"
+OPENSEA_URL = "https://testnets.opensea.io/assets/{}/{}"
 FORKED_LOCAL_ENVIRONMENTS = ["mainnet-fork", "mainnet-fork-dev"]
 LOCAL_BLOCKCHAIN_ENVIRONMENTS = ["development", "ganache-local", "ganache-local-2"]
 

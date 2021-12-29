@@ -19,6 +19,7 @@ LOCAL_BLOCKCHAIN_ENVIRONMENTS = ["development", "ganache-local", "ganache-local-
 
 DECIMALS = 8
 STARTING_PRICE = 2e8
+BREED_MAPPING = ["PUG", "SHIBA_INU", "ST_BERNARD"]
 
 
 def get_account(index=None, account_id=None):
@@ -104,3 +105,7 @@ def fund_contract_with_link(
     link_token_contract = interface.LinkTokenInterface(link_token.address)
     link_token_contract.transfer(contract_address, amount, {"from": account})
     print("Fund contract")
+
+
+def get_breed(breed_number):
+    return BREED_MAPPING[breed_number]
